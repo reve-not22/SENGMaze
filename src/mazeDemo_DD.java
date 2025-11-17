@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class mazeClass {
+public class mazeDemo_DD {
 
     static int[][] maze;
 
@@ -9,13 +9,13 @@ public class mazeClass {
         maze = init(10);
 
         printMaze(maze);
-        Graph g = populateGraph(maze);
+        Graph_DD g = populateGraph(maze);
 
         DFS(g, g.getVertex(0, 0), g.getVertex(9, 0));
     }
 
-    static Graph populateGraph(int[][] m) {
-        Graph g = new Graph();
+    static Graph_DD populateGraph(int[][] m) {
+        Graph_DD g = new Graph_DD();
 
         //add vertices
         for (int y = 0; y < m.length; y++) {
@@ -134,18 +134,18 @@ public class mazeClass {
         }
     }
 
-    static void DFS(Graph g, Vertex startV, Vertex endV) {
-        Stack<Vertex> vertexStack = new Stack<Vertex>();
-        HashSet<Vertex> visitedSet = new HashSet<Vertex>();
+    static void DFS(Graph_DD g, Vertex_DD startV, Vertex_DD endV) {
+        Stack<Vertex_DD> vertexStack = new Stack<Vertex_DD>();
+        HashSet<Vertex_DD> visitedSet = new HashSet<Vertex_DD>();
 
         vertexStack.push(startV);
 
         while (vertexStack.size() > 0) {
-            Vertex currentVertex = vertexStack.pop();
+            Vertex_DD currentVertex = vertexStack.pop();
 
             if (!visitedSet.contains(currentVertex)) {
                 visitedSet.add(currentVertex);
-                for (Vertex v: g.getAdjVertices(currentVertex)) {
+                for (Vertex_DD v: g.getAdjVertices(currentVertex)) {
 
                     if (!visitedSet.contains(v)) {
                         v.predecessor = currentVertex;
@@ -155,10 +155,10 @@ public class mazeClass {
                 }
             }
 
-            ArrayList<Vertex> path = new ArrayList<>();
+            ArrayList<Vertex_DD> path = new ArrayList<>();
 
             if (currentVertex.equals(endV)) {
-                Vertex v = currentVertex;
+                Vertex_DD v = currentVertex;
                 while (v.predecessor != null) {
                     path.add(v);
                     v = v.predecessor;
@@ -166,7 +166,7 @@ public class mazeClass {
                 path.add(startV);
 
                 Collections.reverse(path);
-                for (Vertex vert : path) {
+                for (Vertex_DD vert : path) {
                     System.out.println(vert);
                 }
 
