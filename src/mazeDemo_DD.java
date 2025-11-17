@@ -1,12 +1,16 @@
+import javax.swing.plaf.IconUIResource;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
 import java.util.*;
+import java.util.Scanner;
 
 public class mazeDemo_DD {
 
     static int[][] maze;
 
-
-    public static void main (String[] args) {
-        maze = init(10);
+    public static void main (String[] args) throws FileNotFoundException {
+        maze = readMazeFile("maze.txt");
 
         printMaze(maze);
         Graph_DD g = populateGraph(maze);
@@ -14,12 +18,41 @@ public class mazeDemo_DD {
         DFS(g, g.getVertex(0, 0), g.getVertex(9, 0));
     }
 
+    public static int[][] readMazeFile(String fileName) throws FileNotFoundException {
+        File file = new File(fileName);
+        ArrayList<ArrayList<Integer>> mazeArr = new ArrayList<>();
+
+        Scanner sc = new Scanner(file);
+
+        int y = 0;
+        while (sc.hasNextLine()) {
+            mazeArr.add(new ArrayList<>());
+            String curLine = sc.nextLine();
+            for (char c : curLine.toCharArray()) {
+                    int i = Integer.parseInt(Character.toString(c));
+
+                    mazeArr.get(y).add(i);
+            }
+            y++;
+        }
+
+        int[][] returnArr = new int[mazeArr.size()][mazeArr.getFirst().size()];
+
+        for (y = 0; y < mazeArr.size(); y++) {
+            for (int x = 0; x < mazeArr.get(y).size(); x++) {
+                returnArr[y][x] = mazeArr.get(y).get(x);
+            }
+        }
+
+        return returnArr;
+    }
+
     static Graph_DD populateGraph(int[][] m) {
         Graph_DD g = new Graph_DD();
 
         //add vertices
         for (int y = 0; y < m.length; y++) {
-            for (int x = 0; x < m.length; x++) {
+            for (int x = 0; x < m[0].length; x++) {
                 g.addVertex(x, y, m[y][x]);
             }
         }
@@ -126,7 +159,7 @@ public class mazeDemo_DD {
     static void printMaze(int[][] maze) {
         for (int y = 0; y < maze.length; y++) {
             StringBuilder line = new StringBuilder();
-            for (int x = 0; x < maze.length; x++) {
+            for (int x = 0; x < maze[0].length; x++) {
                 line.append(maze[y][x]);
             }
             System.out.println(line);
