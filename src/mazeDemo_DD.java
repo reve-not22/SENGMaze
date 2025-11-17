@@ -24,7 +24,6 @@ public class mazeDemo_DD {
             }
         }
 
-
         for (int y = 0; y < m.length; y++) {
             for (int x = 0; x < m[0].length; x++) {
                 if (m[y][x] == 0) {
@@ -167,8 +166,11 @@ public class mazeDemo_DD {
 
                 Collections.reverse(path);
                 for (Vertex_DD vert : path) {
+                    maze[vert.y][vert.x] = 5;
                     System.out.println(vert);
                 }
+
+                printMaze(maze);
 
                 return;
             }
