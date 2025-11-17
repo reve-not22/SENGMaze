@@ -1,3 +1,6 @@
+
+
+//this is just the grid
 class Grid
 {
     static int[][] gridArray = new int[10][10];
@@ -17,7 +20,7 @@ class Grid
     {
         //setting the walkable tiles in the example map
         //Row 0
-        gridArray[0][1] = 1;
+        gridArray[0][1] = 1;//starting point
         //Row 1
         gridArray[1][1] = 1;
         gridArray[1][4] = 1;
@@ -64,7 +67,8 @@ class Grid
         gridArray[8][5] = 1;
         gridArray[8][6] = 1;
         gridArray[8][8] = 1;
-        gridArray[8][9] = 1;
+        gridArray[8][9] = 1;//finish point
+        //row9 was all unwalkable
 
     }
 
@@ -77,6 +81,10 @@ class Grid
 
     public static void main(String[] args)
     {
+        Graph_Brett graph =  new Graph_Brett();
+        int start = 0 * 10 + 1;
+        int end = 8 * 10 + 9;
+
         InitGrid();
         for(int i = 0; i < gridArray.length; i++)
         {
@@ -86,8 +94,14 @@ class Grid
                 System.out.print(gridArray[i][j]);
                 
             }
+            
         }
+        System.out.println("");
+        graph.BFS(start, end, gridArray);
     }
+
+
+
 
 
 }
