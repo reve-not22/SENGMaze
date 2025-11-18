@@ -8,6 +8,8 @@ import java.util.Scanner;
 public class mazeDemo_DD {
 
     static int[][] maze;
+    static AbstractMap.SimpleEntry<Integer, Integer> startPoint = new AbstractMap.SimpleEntry<>(0, 0);
+    static AbstractMap.SimpleEntry<Integer, Integer> endPoint = new AbstractMap.SimpleEntry<>(0, 0);
 
     public static void main (String[] args) throws FileNotFoundException {
         maze = readMazeFile("maze.txt");
@@ -15,7 +17,7 @@ public class mazeDemo_DD {
         printMaze(maze);
         Graph_DD g = populateGraph(maze);
 
-        DFS(g, g.getVertex(0, 0), g.getVertex(9, 0));
+        DFS(g, g.getVertex(startPoint.getKey(), startPoint.getValue()), g.getVertex(endPoint.getKey(), endPoint.getValue()));
     }
 
     public static int[][] readMazeFile(String fileName) throws FileNotFoundException {
@@ -28,10 +30,20 @@ public class mazeDemo_DD {
         while (sc.hasNextLine()) {
             mazeArr.add(new ArrayList<>());
             String curLine = sc.nextLine();
+            int x = 0;
             for (char c : curLine.toCharArray()) {
-                    int i = Integer.parseInt(Character.toString(c));
-
-                    mazeArr.get(y).add(i);
+                    if (c == 'S') {
+                        startPoint = new AbstractMap.SimpleEntry<>(x, y);
+                        mazeArr.get(y).add(0);
+                    }
+                    else if (c == 'E'){
+                        endPoint = new AbstractMap.SimpleEntry<>(x, y);
+                        mazeArr.get(y).add(0);
+                    }
+                    else {
+                        mazeArr.get(y).add(Character.getNumericValue(c));
+                    }
+                    x++;
             }
             y++;
         }
