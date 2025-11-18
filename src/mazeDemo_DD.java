@@ -1,7 +1,5 @@
-import javax.swing.plaf.IconUIResource;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.Scanner;
 
@@ -89,31 +87,26 @@ public class mazeDemo_DD {
             }
         }
 
-        /*
-        for (Vertex v : g.getAllVertices()) {
-            System.out.println(v + " adjacent: " + g.getAdjVertices(v));
-        }*/
-
         return g;
     }
 
     static void printMaze(int[][] maze) {
-        for (int y = 0; y < maze.length; y++) {
+        for (int[] ints : maze) {
             StringBuilder line = new StringBuilder();
             for (int x = 0; x < maze[0].length; x++) {
-                line.append(maze[y][x]);
+                line.append(ints[x]);
             }
             System.out.println(line);
         }
     }
 
     static void DFS(Graph_DD g, Vertex_DD startV, Vertex_DD endV) {
-        Stack<Vertex_DD> vertexStack = new Stack<Vertex_DD>();
-        HashSet<Vertex_DD> visitedSet = new HashSet<Vertex_DD>();
+        Stack<Vertex_DD> vertexStack = new Stack<>();
+        HashSet<Vertex_DD> visitedSet = new HashSet<>();
 
         vertexStack.push(startV);
 
-        while (vertexStack.size() > 0) {
+        while (!vertexStack.isEmpty()) {
             Vertex_DD currentVertex = vertexStack.pop();
 
             if (!visitedSet.contains(currentVertex)) {
