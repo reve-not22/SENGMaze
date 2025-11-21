@@ -11,21 +11,7 @@ class Node
 
 class SimpleLinkedList //my version of a linked list
 {
-/*
-    @Override
-    public String toString() 
-    {
-        StringBuilder buildString = new StringBuilder();
-        Node currentNode = head;
-        while (currentNode != null)// grab the rest
-        {
-            buildString.append(currentNode.data);
-            currentNode = currentNode.next;
-        }
 
-        return buildString.toString();
-    }
-*/
     public void add(int n) 
     {
         Node newNode = new Node(n);
@@ -168,13 +154,7 @@ class MyLinkedList implements Simple //think of this as a stack
     {
         return list.isEmpty();
     }
-/*
-    @Override
-    public String toString() 
-    {
-        return list.toString();
-    }
-*/
+
     SimpleLinkedList list;
     int index = 0;
 
@@ -194,7 +174,6 @@ class Graph_Brett
     int visitedStep = 0;
     int pathStep = 0;
 
-  
     void BFS(int source, int target, theBox[][] gridArray)//bfs implmenting a queue
     {
         int rows = gridArray.length;
@@ -285,11 +264,6 @@ class Graph_Brett
         // reverse so it's start → end
         java.util.Collections.reverse(path);
         java.util.Collections.reverse(finalPath);
-
-        // make a visual grid
-        //char[][] visual = new char[rows][cols];
-
-        
 
     }
 

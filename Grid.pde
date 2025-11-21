@@ -72,6 +72,45 @@ class Grid
       }
     }
   }
+  
+  void LoadFromFile(String fileName)
+  {
+    String[] lines = loadStrings(fileName);
+    int rows = lines.length;//number of lines in the file
+    int cols = lines[0].length();//number of characters in that line
+    
+    gridArray = new theBox[rows][cols];
+    
+    for(int r = 0; r < rows; r++)
+    {
+      for(int c = 0; c < cols; c++)
+      {
+        gridArray[r][c] = new theBox();
+        gridArray[r][c].setPosition(c * 30, r * 30);
+        char ch = lines[r].charAt(c);
+        int val = 0;
+        
+        if(ch == '1')
+        {
+          val = 1;
+        }
+        else if(ch == 'S')
+        {
+          val = 1;
+        }
+        else if(ch == 'E')
+        {
+          val = 1;
+        }
+        
+        gridArray[r][c].value = val;
+        gridArray[r][c].SetColour();
+
+        
+      }
+    }
+    
+  }
 
   void AddPaths()
   {
@@ -137,10 +176,42 @@ class Grid
     }
   }
 
-  void InitGrid()
+  void InitGrid(int num)
   {
-    MakeBasicGrid();
-    AddPaths();
+    if(num == 0)
+    {
+      MakeBasicGrid();
+      AddPaths();
+    }
+    
+    if(num == 1)
+    {
+      MakeBasicGrid();
+      LoadFromFile("maze.txt");
+      
+    }
+    
+    if(num == 2)
+    {
+      MakeBasicGrid();
+      LoadFromFile("maze1.txt");
+      
+    }
+    
+    if(num == 3)
+    {
+      MakeBasicGrid();
+      LoadFromFile("maze2.txt");
+     
+    }
+    
+    if(num == 4)
+    {
+      MakeBasicGrid();
+      LoadFromFile("maze3.txt");
+      
+    }
+    
   }
 
   void Update()
