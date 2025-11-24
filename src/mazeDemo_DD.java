@@ -10,12 +10,23 @@ public class mazeDemo_DD {
     static AbstractMap.SimpleEntry<Integer, Integer> endPoint = new AbstractMap.SimpleEntry<>(0, 0);
 
     public static void main (String[] args) throws FileNotFoundException {
-        maze = readMazeFile("maze.txt");
+        maze = readMazeFile("maze1.txt");
 
+        System.out.println("maze 1:");
         printMaze(maze);
         Graph_DD g = populateGraph(maze);
 
+        System.out.println(" \n solved:" );
         DFS(g, g.getVertex(startPoint.getKey(), startPoint.getValue()), g.getVertex(endPoint.getKey(), endPoint.getValue()));
+
+        maze = readMazeFile("maze2.txt");
+        System.out.println("\n maze 2:");
+        printMaze(maze);
+        g = populateGraph(maze);
+
+        System.out.println(" \n solved:" );
+        DFS(g, g.getVertex(startPoint.getKey(), startPoint.getValue()), g.getVertex(endPoint.getKey(), endPoint.getValue()));
+
     }
 
     public static int[][] readMazeFile(String fileName) throws FileNotFoundException {
@@ -133,8 +144,7 @@ public class mazeDemo_DD {
 
                 Collections.reverse(path);
                 for (Vertex_DD vert : path) {
-                    maze[vert.y][vert.x] = 5;
-                    System.out.println(vert);
+                    maze[vert.y][vert.x] = 3;
                 }
 
                 printMaze(maze);

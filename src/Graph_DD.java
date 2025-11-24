@@ -11,7 +11,6 @@ public class Graph_DD {
         adjacentVertices = new HashMap<>();
     }
 
-
     public Vertex_DD addVertex(int x, int y, int data) {
         Vertex_DD newVertex = new Vertex_DD(x, y, data);
 
